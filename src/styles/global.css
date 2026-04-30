@@ -1,0 +1,426 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ============================================================
+   THÈME — Mode sombre (défaut) et mode clair
+   ============================================================ */
+
+:root {
+  --bg: #0a0f1e;
+  --surface: #111827;
+  --surface2: #1a2235;
+  --surface3: #243350;
+  --accent: #4f8ef7;
+  --accent2: #7c3aed;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --purple: #8b5cf6;
+  --text: #f1f5ff;
+  --muted: #6b7fa3;
+  --border: rgba(255, 255, 255, 0.07);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --font-title: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --px: 20px; /* marge horizontale globale */
+}
+
+/* Mode clair */
+[data-theme='light'] {
+  --bg: #f0f4ff;
+  --surface: #ffffff;
+  --surface2: #eef2fb;
+  --surface3: #e2e8f5;
+  --text: #0a0f1e;
+  --muted: #6b7fa3;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.page-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 var(--px) 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Supprime le padding horizontal interne — géré par page-container */
+.page-container > * {
+}
+
+.bg-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+      ellipse 600px 400px at 20% 10%,
+      rgba(79, 142, 247, 0.09) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 400px 300px at 80% 80%,
+      rgba(124, 58, 237, 0.07) 0%,
+      transparent 70%
+    );
+  transition: opacity 0.3s;
+}
+
+/* ============================================================
+   BOUTONS — avec animations
+   ============================================================ */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 15px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 4px 16px rgba(79, 142, 247, 0.3);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 8px 24px rgba(79, 142, 247, 0.4);
+}
+.btn-primary:active {
+  transform: translateY(0);
+  filter: brightness(0.97);
+}
+
+.btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 14px;
+  background: var(--surface);
+  color: var(--text);
+  transition: transform 0.18s ease, background 0.18s ease,
+    border-color 0.18s ease;
+}
+.btn-secondary:hover {
+  background: var(--surface2);
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Bouton icône rond */
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--muted);
+  transition: transform 0.18s, background 0.18s, color 0.18s;
+}
+.btn-icon:hover {
+  transform: scale(1.1);
+  background: var(--surface2);
+  color: var(--accent);
+}
+.btn-icon:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================
+   CARTES — avec hover animé
+   ============================================================ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 142, 247, 0.15);
+}
+.form-input::placeholder {
+  color: var(--muted);
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.badge-green {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--green);
+}
+.badge-amber {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--amber);
+}
+.badge-red {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--red);
+}
+.badge-blue {
+  background: rgba(79, 142, 247, 0.12);
+  color: var(--accent);
+}
+
+/* ============================================================
+   BOTTOM NAV
+   ============================================================ */
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 16px;
+  border-radius: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.18s, opacity 0.18s;
+  opacity: 0.45;
+}
+.bottom-nav-item.active {
+  opacity: 1;
+}
+.bottom-nav-item:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+.bottom-nav-item.active:hover {
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes ripple {
+  from {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.4s ease both;
+}
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease both;
+}
+.animate-bounce {
+  animation: bounce 1.2s ease infinite;
+}
+.animate-countUp {
+  animation: countUp 0.5s ease both;
+}
+
+/* Délais pour les entrées en cascade */
+.delay-1 {
+  animation-delay: 0.08s;
+}
+.delay-2 {
+  animation-delay: 0.16s;
+}
+.delay-3 {
+  animation-delay: 0.24s;
+}
+.delay-4 {
+  animation-delay: 0.32s;
+}
+.delay-5 {
+  animation-delay: 0.4s;
+}
+
+/* ============================================================
+   WHATSAPP FLOTTANT
+   ============================================================ */
+.whatsapp-float {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 200;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: bounce 2s ease infinite;
+}
+.whatsapp-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+  animation: none;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface2);
+  border-radius: 3px;
+}
+
+/* ============================================================
+   TRANSITIONS GLOBALES
+   ============================================================ */
+a,
+button {
+  transition: all 0.18s ease;
+}
